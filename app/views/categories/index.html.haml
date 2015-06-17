@@ -1,19 +1,22 @@
 %h1 Listing categories
 
-%table.table
-  %tr
-    %th Name
-    %th
-    %th
-    %th
-
-  - categories.each do |category|
-    %tr
-      %td= category.name
-      %td= link_to 'Show', category
-      %td= link_to 'Edit', edit_category_path(category)
-      %td= link_to 'Destroy', category, method: :delete, data: { confirm: 'Are you sure?' }
+.list-group
+  - unless user_signed_in? && current_user.admin?
+    - categories.each do |category|
+      =link_to category, class: 'list-group-item' do
+        %span.glyphicon.glyphicon-list
+        =category.name
+  - else
+    - categories.each do |category|
+      .list-group-item
+        %span.glyphicon.glyphicon-list
+        =category.name
+        %span.pull-right
+          =link_to "Show", category, class: "btn btn-xs btn-success"
+          =link_to "Edit", edit_category_path(category), class: "btn btn-xs btn-info"
+          =link_to category, method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-xs btn-warning" do
+            %span.glyphicon.glyphicon-trash
 
 %br
-
-= link_to 'New Category', new_category_path
+- if user_signed_in? && current_user.admin?
+  = link_to 'New Category', new_category_path, class: 'btn btn-default'

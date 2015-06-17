@@ -1,17 +1,25 @@
 %p#notice= notice
+.row
+  .col-md-3
+    %p
+      .list-group Categories:
+      -categories.each do |c|
+        - active_css = category.name == c.name ? "active" : ""
+        =link_to c, class: "list-group-item #{active_css}" do
+          %span.glyphicon.glyphicon-list
+          =c.name
+  .col-md-9
+    %p
+      .list-group Products:
+      - category.products.each do |product|
+        = link_to(product.title, category_product_path(category, product), class: 'list-group-item')
 
-%p
-  %b Name:
-  = category.name
 
-%p
-  - category.products.each do |product|
-    = product.title
+.well.well-lg.col-md-6.col-md-offset-3
+  %p
+    %h3 New product
+    = render 'products/form'
 
-%p
-  %h3 New product
-  = render 'products/form'
-
-= link_to 'Edit', edit_category_path(category)
+= link_to 'Edit', edit_category_path(category), class: 'btn btn-default'
 \|
 = link_to 'Back', categories_path, class: 'btn btn-primary'

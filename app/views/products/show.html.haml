@@ -1,25 +1,38 @@
 %p#notice= notice
 %p#error= flash[:error]
+%h2= "Category #{product.category.name}"
+%p
+.row
+  .col-md-3
+    .list-group Products:
+    - category.products.each do |p|
+      = link_to(p.title, category_product_path(category, p), class: 'list-group-item')
+  .col-md-9
+    .thumbnail
+      %img.img-responsive{:src => "http://placehold.it/800x300"}
+      .caption-full
+        %h4.pull-right
+          %b Price:
+          = product.price
+        %h4
+          %b Title:
+          = product.title
+        %p
+          %b Description:
+          = product.description
+          %p.pull-right
+            %em Avarage rating:
+            = product.average_rating
+          %p
+            %b Category
+            = product.category.name
 
-%p
-  %b Title:
-  = product.title
-%p
-  %b Description:
-  = product.description
-%p
-  %b Price:
-  = product.price
+.well.well-sm.col-md-9.col-md-offset-3
+  %h3 Reviews
+  = render reviews
 
-%p
-  %b Category
-  = product.category.name
-
-%h3 Reviews
 = render 'reviews/form'
 
-= render reviews
-
-= link_to 'Edit', edit_category_product_path(category.id, product.id)
+= link_to 'Edit', edit_category_product_path(category.id, product.id), class: 'btn btn-default'
 \|
 = link_to 'Back', category_products_path, class: 'btn btn-primary'
