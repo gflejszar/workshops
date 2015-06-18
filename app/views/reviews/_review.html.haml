@@ -1,29 +1,4 @@
 %p= review.content
 %p
-  - if review.rating >= 1
-    %span.glyphicon.glyphicon-star
-  - else
-    %span.glyphicon.glyphicon-star-empty
-    
-  - if review.rating >= 2
-    %span.glyphicon.glyphicon-star
-  - else
-    %span.glyphicon.glyphicon-star-empty
-    
-  - if review.rating >= 3
-    %span.glyphicon.glyphicon-star
-  - else
-    %span.glyphicon.glyphicon-star-empty
-    
-  - if review.rating >= 4
-    %span.glyphicon.glyphicon-star
-  - else
-    %span.glyphicon.glyphicon-star-empty
-    
-  - if review.rating >= 5
-    %span.glyphicon.glyphicon-star
-  - else
-    %span.glyphicon.glyphicon-star-empty
-
-  %b= review.rating
+  = render partial: 'reviews/rating', :locals => {rating: review.rating}
   %em= review.author

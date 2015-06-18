@@ -1,0 +1,21 @@
+- provide(:title, @user.email)
+.row
+  .col-md-4
+    %section
+      %h2
+        = gravatar_for @user
+        = "#{@user.firstname} #{@user.lastname}"
+      = @user.email
+      %p
+        Member since #{@user.member_since}
+    - if current_user == @user
+      =link_to "Edit", edit_user_registration_path, class: 'btn btn-xs btn-default'
+  - if @user.reviews.any?
+    .col-md-8.well.well-sm
+      %h3
+        Reviews (#{@user.reviews.count})
+      - @user.reviews.last(5).reverse.each do |review|
+        %p= review.created_at.strftime("%d-%m-%y")
+        %p= review.product.title
+        %p= review.content
+        = render partial: 'reviews/rating', :locals => {rating: review.rating}
