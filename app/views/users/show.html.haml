@@ -13,7 +13,7 @@
   - if @user.reviews.any?
     .col-md-8.well.well-sm
       %h3
-        Reviews (#{@user.reviews.count})
+        Reviews (#{@user.reviews.count}) - last five:
       - @user.reviews.last(5).reverse.each do |review|
         %p= review.created_at.strftime("%d-%m-%y")
         %p= review.product.title
