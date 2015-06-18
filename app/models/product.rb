@@ -8,6 +8,6 @@ class Product < ActiveRecord::Base
   validates :description, presence: true
 
   def average_rating
-     self.reviews.average(:rating).round(2)
+    self.reviews.average(:rating).round(2) if self.reviews.count != 0
   end
 end
