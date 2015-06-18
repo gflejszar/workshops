@@ -24,13 +24,17 @@
           %p
             %b Category
             = product.category.name
-
+#content{:style => "display: none;", :class => "col-md-9 col-md-offset-3"}
+  = render 'reviews/form'
 .well.well-sm.col-md-9.col-md-offset-3
+  %span.pull-right
+    %input#hideshow{:type => "button", :value => "Leave review", :class => 'btn btn-success'}
   %h3 Reviews
+
   = render reviews
 
-= render 'reviews/form'
-
-= link_to 'Edit', edit_category_product_path(category.id, product.id), class: 'btn btn-default'
-\|
-= link_to 'Back', category_path(category), class: 'btn btn-primary'
+%p
+.row.col-md-12
+  = link_to 'Edit', edit_category_product_path(category.id, product.id), class: 'btn btn-default'
+  \|
+  = link_to 'Back', category_path(category), class: 'btn btn-primary'

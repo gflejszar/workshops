@@ -3,3 +3,9 @@
 //= require bootstrap
 //= require_tree .
 
+$(document).ready(function(){
+        $('#hideshow').on('click', function(event) {
+             $('#content').toggle('show');
+        });
+    });
+
